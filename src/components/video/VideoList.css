@@ -1,0 +1,9 @@
+body{
+    margin-top: 20px;
+}
+button{
+    padding:10px;
+}
+.item{
+    cursor: pointer;
+}
