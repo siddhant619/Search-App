@@ -48,11 +48,19 @@ const Images = ({searchTerm}) => {
 
     return (
         <div>
+            <div className="content">
+            {images.length===0?null:
             <React.Fragment> 
                         <i class="big arrow alternate circle left icon " onClick={handlePrev}></i>
                         <i class="big arrow alternate circle right icon" onClick={handleNext}></i>
             </React.Fragment>
+            } 
+            </div>  
+            {/* <div className="ui hidden divider"></div> */}
+            <div className="ui item">
             <ImageList images={images}/>
+            </div>
+            
         </div>
     )
 }

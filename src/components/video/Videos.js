@@ -79,7 +79,7 @@ import VideoList from './VideoList'
     }
     return (
         <div>
-            Videos
+            
             <div className="ui grid">
                 <div className="ui row">
                     <div className="eleven wide column">

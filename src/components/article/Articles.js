@@ -68,13 +68,16 @@ const Articles = ({searchTerm}) => {
     }
     return (
         <div>
-            Articles
+            
             <div className="ui celled list">
+            {results.length===0?null:
             <React.Fragment> 
                         <i class="big arrow alternate circle left icon " onClick={handlePrev}></i>
                         <i class="big arrow alternate circle right icon" onClick={handleNext}></i>
-                    </React.Fragment>
-                {renderedResults}
+            </React.Fragment>
+            }
+            
+            {renderedResults}
             </div>
         </div>
     )

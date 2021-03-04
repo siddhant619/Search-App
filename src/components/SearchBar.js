@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import {Link,BrowserRouter as Router } from 'react-router-dom'
 
 const SearchBar = ({setSearchTerm}) => {
     const [term,setTerm]=useState('');
@@ -16,11 +17,19 @@ const SearchBar = ({setSearchTerm}) => {
                         placeholder="Search..."
                         value={term}
                         onChange={(e)=>setTerm(e.target.value)} className="input"></input>
-                        <button className="ui button">Search</button>
+                        <button className="ui secondary button">Search</button>
 
                     </div>
                 </div>
             </div>
+            {/* <Router>
+            <div class="ui buttons">
+                        <button class="ui  button"><Link exact to="/">Images</Link></button>
+                        <button class="ui  button"><Link exact to="/videos">Videos</Link></button>
+                        <button class="ui  button"><Link exact to="/articles">Articles</Link></button>
+            </div>
+            </Router> */}
+            
         </form>
     )
 }
