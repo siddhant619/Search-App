@@ -5,13 +5,13 @@ import wiki from '../../apis/wiki'
 
 const Articles = ({searchTerm}) => {
     const [results,setResults]=useState([]);
-    const [page, setPage] = useState(0)
-
+    const [page, setPage] = useState(0);
+    const [isNext,setIsNext]=useState(1);//if isNext===1 next result page avaliable.
     //console.log('I RUN WITH EVERY RENDER');
     //console.log(results);//this runs twice for each letter entered- once coz term state changes, 2nd when api is called and results state changes(after delay completed)
     const search= async()=>{
         try{
-            console.log('request made');
+            //console.log('request made');
             const {data}=await wiki.get('',{
                 params:{
                     
@@ -19,7 +19,11 @@ const Articles = ({searchTerm}) => {
                     sroffset:page
                 }
             })
-            console.log('from wiki',data);
+            //console.log('from wiki',data,page);
+            if(!data.continue)
+                setIsNext(0);
+            else
+                setIsNext(1);
             setResults(data.query.search);
         }
         catch(e){
@@ -29,9 +33,12 @@ const Articles = ({searchTerm}) => {
     }
 
     useEffect(()=>{ 
-        console.log('Initial render or term update');
+        //console.log('Initial render or term update');
         if(searchTerm){ //this occurs for 1st render- where term= programming but result array is empty, so make a request without a delay
-            search();
+            if(page>0)
+                setPage(0);
+            else
+                search();
         }
         
     }, [searchTerm]);
@@ -55,28 +62,40 @@ const Articles = ({searchTerm}) => {
         );
     } )
     useEffect(() => {
-        if(searchTerm)
+        if(searchTerm )
             search();
     
     }, [page]);
     const handlePrev=()=>{
         if(page>0)
-            setPage(prevPage=>prevPage-1);
+            setPage(prevPage=>prevPage-10);
     }
     const handleNext=()=>{
-        setPage(prevPage=>prevPage+1);
+        setPage(prevPage=>prevPage+10);
     }
     return (
         <div>
             
             <div className="ui celled list">
-            {results.length===0?null:
-            <React.Fragment> 
-                        <i class="big arrow alternate circle left icon " onClick={handlePrev}></i>
-                        <i class="big arrow alternate circle right icon" onClick={handleNext}></i>
+            {!searchTerm?null:
+            <React.Fragment>
+                        <div className="ui icon buttons"> 
+                            <button className={`ui  button ${page===0?'disabled':''}`} onClick={handlePrev}>
+                                <i className={`arrow alternate  left icon`} ></i>
+                                Previous
+                            </button>
+                            <button className={`ui  button ${isNext?'':'disabled'} `}  onClick={handleNext}>
+                                <i className={` arrow alternate  right icon `} ></i>
+                                    Next
+                                
+                            </button>
+                        </div>
             </React.Fragment>
             }
-            
+            {searchTerm && results.length===0?
+                <div className="ui header">No results found</div>
+            :''           
+            }
             {renderedResults}
             </div>
         </div>

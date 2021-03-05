@@ -7,7 +7,7 @@ export default axios.create({
         list:'search',
         format:'json',
         origin:'*',
-        
+        srlimit:10 //no of articles returned in a query
 
     }
     

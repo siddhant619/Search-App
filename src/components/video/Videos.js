@@ -83,15 +83,28 @@ import VideoList from './VideoList'
             <div className="ui grid">
                 <div className="ui row">
                     <div className="eleven wide column">
+                    {searchTerm && videoList.length===0?
+                        <div className="ui header">No results found</div>
+                    :''           
+                    }
                         <VideoDetail video={selectedVideo} />
                     </div>
                     <div className="five wide column">
                     {videoList.length===0?null:
-                    <React.Fragment> 
-                        <i class="big arrow alternate circle left icon " onClick={handlePrev}></i>
-                        <i class="big arrow alternate circle right icon" onClick={handleNext}></i>
-                    </React.Fragment>
+                        <div className="ui icon buttons"> 
+                            <button className={`ui  button ${prevPageToken===''?'disabled':''}`} onClick={handlePrev}>
+                                <i className={`arrow alternate  left icon`} ></i>
+                                Previous
+                            </button>
+                            <button className={`ui  button ${nextPageToken===''?'disabled':''} `}  onClick={handleNext}>
+                                <i className={` arrow alternate  right icon `} ></i>
+                                    Next
+                                
+                            </button>
+                        </div>
                     }
+                    
+                    
                         <VideoList videoList={videoList} onVideoSelect={onVideoSelect}  />
                     </div>
                 </div>
