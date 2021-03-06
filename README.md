@@ -5,7 +5,9 @@ An application to search for images, videos and articles all in a single page. B
 
 ## Project GIF and DEMO
 
-[Project demo](https://allinone-search.netlify.app)
+[Project demo](https://allinone-search.netlify.app)  
+
+
 ![Project GIF](gif/appgif.gif)
 
 
@@ -29,5 +31,5 @@ To Start Server:
 
 To Visit App:
 
-`localhost:3000/ideas`  
+`localhost:3000/`  
 
